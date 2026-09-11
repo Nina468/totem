@@ -11,7 +11,7 @@ const PHOTOS = {
   "missoshiru":"img/missoshiru.avif",
   "mochi":"img/mochi.jpg",
   "niguiri_salmao":"img/neguiri salmão.jpg",
-  "refrigerante_lata":"img/refrigerante lata.jpg",
+  "refrigerante_lata":"img/refrigerante Lata.jpg",
   "rolinho_doce":"img/rolinho doce.jpg",
   "sashimi_atum":"img/sashimi atum.jpg",
   "sorvete_matcha":"img/sorvete matcha.jpg",
