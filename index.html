@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hot Etec — Autoatendimento</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+
+<div class="ambient-glow"></div>
+<div class="kanji kanji--top" aria-hidden="true">和</div>
+<div class="kanji kanji--bottom" aria-hidden="true">食</div>
+
+<section id="screen-start" class="screen active">
+  <div class="logo-card">
+    <svg class="bowl-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14 30 C14 20, 22 12, 32 12" stroke="#c8102e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <line x1="28" y1="10" x2="20" y2="30" stroke="#f5f2ef" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="34" y1="9" x2="27" y2="30" stroke="#f5f2ef" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M10 30 h32 a16 16 0 0 1 -32 0 z" fill="none" stroke="#f5f2ef" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M10 30 h32 a16 16 0 0 1 -32 0 z" fill="#f5f2ef" opacity="0.06"/>
+    </svg>
+    <div class="logo-text">
+      <div class="hot-etec">Hot <span class="etec">Etec</span></div>
+      <div class="subtitle">CULINÁRIA ORIENTAL</div>
+    </div>
+  </div>
+  <p class="tagline">Culinária Oriental Autêntica</p>
+  <button class="pill-btn" onclick="goTo('screen-menu')">TOQUE PARA INICIAR</button>
+  <p class="footer-note">HotEtec © 2026 — Sistema de Autoatendimento</p>
+</section>
+
+<section id="screen-menu" class="screen">
+  <div class="topbar">
+    <div class="brand-mini">
+      <svg class="bowl-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 30 C14 20, 22 12, 32 12" stroke="#c8102e" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <line x1="28" y1="10" x2="20" y2="30" stroke="#f5f2ef" stroke-width="3" stroke-linecap="round"/>
+        <line x1="34" y1="9" x2="27" y2="30" stroke="#f5f2ef" stroke-width="3" stroke-linecap="round"/>
+        <path d="M10 30 h32 a16 16 0 0 1 -32 0 z" fill="none" stroke="#f5f2ef" stroke-width="3" stroke-linejoin="round"/>
+      </svg>
+      <span>Hot <span class="etec">Etec</span></span>
+    </div>
+    <button class="cart-btn" onclick="openCart()" aria-label="Abrir carrinho">
+      🛒
+      <span class="badge" id="cart-badge" style="display:none;">0</span>
+    </button>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="menu-grid" id="menu-grid"><div class="item-card"></div>
+</section>
+
+<section id="screen-payment" class="screen">
+  <div class="payment-wrap">
+    <button class="back-link" onclick="goTo('screen-menu')">← Voltar ao cardápio</button>
+    <h2 class="payment-title">Finalizar Pedido</h2>
+    <div class="summary-box" id="payment-summary"></div>
+
+<div class="customer-info">
+
+  <h3>Informações do cliente</h3>
+
+  <label for="cliente-nome">Nome</label>
+  <input type="text" id="cliente-nome" placeholder="Digite seu nome">
+
+  <label for="cliente-cpf">CPF</label>
+  <input
+    type="text"
+    id="cliente-cpf"
+    placeholder="Digite seu CPF"
+    maxlength="14"
+  >
+
+</div>
+
+
+
+
+<div class="payment-methods" id="payment-methods">
+    
+    <p style="font-size:.85rem; color:#cfc9c5; margin-bottom:.9rem;">Escolha a forma de pagamento</p>
+    <div class="pay-methods" id="pay-methods">
+      <button class="pay-method" data-method="pix" onclick="selectMethod('pix')"><span class="icon">📱</span> Pix</button>
+      <button class="pay-method" data-method="cartao" onclick="selectMethod('cartao')"><span class="icon">💳</span> Cartão</button>
+      <button class="pay-method" data-method="dinheiro" onclick="selectMethod('dinheiro')"><span class="icon">💵</span> Dinheiro</button>
+    </div>
+    <div class="payment-detail" id="payment-detail"></div>
+    <button class="confirm-btn" id="confirm-btn" disabled onclick="confirmOrder()">CONFIRMAR PAGAMENTO</button>
+  </div>
+</section>
+
+<section id="screen-confirm" class="screen">
+  <div class="check-circle">✓</div>
+  <h2 class="confirm-title">Pedido Confirmado!</h2>
+  <p class="confirm-sub">Retire seu pedido no balcão quando a senha for chamada.</p>
+  <div class="order-number" id="order-number">#000</div>
+  <button class="new-order-btn" onclick="resetOrder()">Fazer novo pedido</button>
+</section>
+ 
+<!-- JANELA DE DETALHES DO PRODUTO -->
+<div class="product-modal" id="product-modal" onclick="closeProductModal(event)">
+  
+  <button class="product-modal-close" onclick="closeProductModal()">
+    ×
+  </button>
+
+  <div class="product-modal-box">
+
+    <img
+      id="product-modal-image"
+      class="product-modal-image"
+      src=""
+      alt=""
+    >
+
+    <div class="product-modal-info">
+
+      <h2 id="product-modal-name"></h2>
+
+      <p id="product-modal-description"></p>
+
+      <div class="product-modal-price" id="product-modal-price"></div>
+
+      <button
+        class="product-modal-add"
+        id="product-modal-add"
+      >
+        ADICIONAR AO PEDIDO
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="cart-backdrop" id="cart-backdrop" onclick="closeCart()"></div>
+<aside class="cart-panel" id="cart-panel">
+  <div class="cart-header">
+    <h2>Seu pedido</h2>
+    <button class="close-btn" onclick="closeCart()" aria-label="Fechar">×</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-footer">
+    <div class="cart-total-row"><span>Total</span><span class="val" id="cart-total">R$ 0,00</span></div>
+    <button class="checkout-btn" id="checkout-btn" disabled onclick="goToPayment()">IR PARA PAGAMENTO</button>
+  </div>
+</aside>
+
+
+<script src="js/script.js"></script>
+</body>
+</html>
